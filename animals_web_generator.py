@@ -47,9 +47,9 @@ def serialize_animal(animal):
 
 
 def main():
-    """Milestone 1: Instead animals_data.json API with animal 'fox'."""
+    """Milestone 2: User Input"""
 
-    animal_name = "fox"
+    animal_name = input("Enter a name of an animal: ").strip()  # <<< NEU
 
     url = "https://api.api-ninjas.com/v1/animals"
     headers = {
@@ -72,6 +72,7 @@ def main():
     with open("animals.html", "w", encoding="utf-8") as handle:
         handle.write(new_html)
 
+    print("Website was successfully generated to the file animals.html.")
 
 if __name__ == "__main__":
     main()
