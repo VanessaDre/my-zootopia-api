@@ -1,4 +1,5 @@
 import json
+import requests
 
 
 def load_data(file_path):
@@ -46,7 +47,18 @@ def serialize_animal(animal):
 
 
 def main():
-    animals_data = load_data("animals_data.json")
+    """Milestone 1: Instead animals_data.json API with animal 'fox'."""
+
+    animal_name = "fox"
+
+    url = "https://api.api-ninjas.com/v1/animals"
+    headers = {
+        "X-Api-Key": "Z2weJ7dd51aB79wtO25fFrDrxn8ELKo87C1D8fkL"
+    }
+    params = {"name": animal_name}
+
+    response = requests.get(url, headers=headers, params=params)
+    animals_data = response.json()
 
     output = ""
     for animal in animals_data:
