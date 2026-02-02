@@ -1,19 +1,26 @@
-import json
-import requests
+"""
+Module responsible for generating the website based on animal data.
+"""
 
-
-def load_data(file_path):
-    with open(file_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+import data_fetcher
 
 
 def serialize_animal(animal):
+    """
+    Converts a single animal dictionary into an HTML list item.
+
+    Parameters:
+        animal (dict): The animal data to display.
+
+    Returns:
+        str: HTML representation of the animal card.
+    """
     if not isinstance(animal, dict):
         return ""
 
     name = animal.get("name")
-
     diet = animal.get("diet")
+
     if diet is None and isinstance(animal.get("characteristics"), dict):
         diet = animal["characteristics"].get("diet")
 
@@ -47,18 +54,13 @@ def serialize_animal(animal):
 
 
 def main():
-    """Milestone 1, 2 and 3"""
-
-    animal_name = input("Enter a name of an animal: ").strip()  # <<< NEU
-
-    url = "https://api.api-ninjas.com/v1/animals"
-    headers = {
-        "X-Api-Key": "Z2weJ7dd51aB79wtO25fFrDrxn8ELKo87C1D8fkL"
-    }
-    params = {"name": animal_name}
-
-    response = requests.get(url, headers=headers, params=params)
-    animals_data = response.json()
+    """
+    Main function that prompts the user for an animal name,
+    fetches data using the data_fetcher module,
+    and generates an HTML page.
+    """
+    animal_name = input("Enter a name of an animal: ").strip()
+    animals_data = data_fetcher.fetch_data(animal_name)
 
     if animals_data:
         output = ""
@@ -82,5 +84,7 @@ def main():
 
     print("Website was successfully generated to the file animals.html.")
 
+
 if __name__ == "__main__":
     main()
+
