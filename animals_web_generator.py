@@ -47,7 +47,7 @@ def serialize_animal(animal):
 
 
 def main():
-    """Milestone 2: User Input"""
+    """Milestone 1, 2 and 3"""
 
     animal_name = input("Enter a name of an animal: ").strip()  # <<< NEU
 
