@@ -60,9 +60,17 @@ def main():
     response = requests.get(url, headers=headers, params=params)
     animals_data = response.json()
 
-    output = ""
-    for animal in animals_data:
-        output += serialize_animal(animal)
+    if animals_data:
+        output = ""
+        for animal in animals_data:
+            output += serialize_animal(animal)
+    else:
+        output = (
+            f'<li class="cards__item">'
+            f'<div class="card__title">No results</div>'
+            f'<p class="card__text">The animal "{animal_name}" doesn\'t exist.</p>'
+            f'</li>'
+        )
 
     with open("animals_template.html", "r", encoding="utf-8") as handle:
         template = handle.read()
