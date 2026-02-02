@@ -3,9 +3,13 @@ Module responsible for fetching animal data from the API.
 """
 
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 API_URL = "https://api.api-ninjas.com/v1/animals"
-API_KEY = "Z2weJ7dd51aB79wtO25fFrDrxn8ELKo87C1D8fkL"
+API_KEY = os.getenv("API_KEY")
 
 
 def fetch_data(animal_name):
